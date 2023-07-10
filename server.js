@@ -1,6 +1,6 @@
 const express = require('express');
-const serverless = require('serverless-http');
-const router = express.Router();
+// const serverless = require('serverless-http');
+// const router = express.Router();
 const app = express();
 const cors = require('cors');
 const connectDB = require('./config/db');
@@ -36,5 +36,5 @@ app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
 
-app.use('/.netlify/server', router);
-module.exports.handler = serverless(app);
+// app.use('/.netlify/server', router);
+// module.exports.handler = serverless(app);
