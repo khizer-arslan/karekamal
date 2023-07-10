@@ -39,20 +39,21 @@ const UserSchema = new mongoose.Schema({
   MyRequest: {
     type: Array,
   },
+  MyDonation: {
+    type: Array,
+  },
   ReadyForBlood: {
     type: Boolean,
     default: false,
   },
   isAdmin: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
 const User = mongoose.model('user', UserSchema);
 module.exports = User;
-
-
 
 // Admin Credentials
 // "email": "moazam@gmail.com",

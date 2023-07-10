@@ -1,6 +1,4 @@
 const express = require('express');
-// const serverless = require('serverless-http');
-// const router = express.Router();
 const app = express();
 const cors = require('cors');
 const connectDB = require('./config/db');
@@ -17,11 +15,10 @@ app.get('/', (req, res) => res.send('Api Running'));
 app.use('/api/signup', require('./routes/api/signup'));
 app.use('/api/login', require('./routes/api/login'));
 app.use('/api/logout', require('./routes/api/logout'));
-app.use('/api/profile', require('./routes/api/profile'));
-app.use('/api/posts', require('./routes/api/posts'));
 app.use('/api/resetpsw', require('./routes/api/resetpsw'));
 app.use('/api/news', require('./routes/api/news'));
 app.use('/api/requests', require('./routes/api/requests'));
+app.use('/api/donationS', require('./routes/api/donation'));
 app.use('/api/updateProfile', require('./routes/api/updatedProfile'));
 app.use('/api/changePassword', require('./routes/api/changePassword'));
 app.use('/api/feedbackSubmitted', require('./routes/api/FeedbackSubmitted'));
@@ -34,5 +31,4 @@ app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
 
-// app.use('/.netlify/server', router);
-// module.exports.handler = serverless(app);
+

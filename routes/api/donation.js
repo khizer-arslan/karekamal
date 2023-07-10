@@ -6,10 +6,6 @@ const config = require('config');
 const User = require('../../config/models/User');
 const { body, validationResult } = require('express-validator');
 
-//  Route   post  api/users
-//  Desc    Register user
-//  Access  Public
-
 router.post('/', async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -19,76 +15,40 @@ router.post('/', async (req, res) => {
     });
   }
   try {
-    const {
-      id,
-      userName,
-      amount,
-      familyM,
-      phone,
-      cnic,
-      business,
-      hospital,
-      disease,
-      city,
-      hospitalPhone,
-      dOB,
-      insName,
-      bloodGroup,
-      type,
-    } = req.body;
+    const { id, amount, type } = req.body;
     console.log('type', type);
 
     let updates;
     if (type === 'rashanR') {
       updates = {
         type: type,
-        userName: userName, //
+
         amount: amount, //
-        familyM: familyM, //
-        phone: phone, //
-        cnic: cnic, //
-        business: business, //
+        //
       };
     } else if (type === 'medicineR') {
       updates = {
         type: type,
-        userName: userName, //
+
         amount: amount, //
-        phone: phone, //
-        hospital: hospital, //
-        disease: disease, //
-        city: city, //
-        hospitalPhone: hospitalPhone, //
       };
     } else if (type === 'educationR') {
       updates = {
         type: type,
-        userName: userName, //
+
         amount: amount, //
-        phone: phone, //
-        cnic: cnic, //
-        business: business, //
-        city: city, //
-        dOB: dOB, //
-        insName: insName, //
       };
-    } else if (type === 'bloodR') {
+    } else if (type === 'rozgarR') {
       updates = {
         type: type,
-        userName: userName,
-        phone: phone,
-        cnic: cnic,
-        hospital: hospital,
-        disease: disease,
-        city: city,
-        bloodGroup: bloodGroup,
+        amount: amount, //
       };
     } else {
       updates = {};
     }
 
     const NewRecord = {
-      $push: { MyRequest: updates },
+      $push: { MyDonation: updates },
     };
 
     const user = await User.findOneAndUpdate({ _id: id }, NewRecord, {
@@ -96,7 +56,7 @@ router.post('/', async (req, res) => {
       runValidators: true,
     });
     // Save to the database
-    console.log('USER', user);
+    console.log('USER');
 
     if (!user) {
       return res.status(200).json({

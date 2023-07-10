@@ -20,47 +20,46 @@ router.post(
   // Name and pass the second parameter as a custom error message
   [body('email', 'Please include a valid email').isEmail()],
   async (req, res) => {
-
-    const { email, userName } = req.body;
-    // let user = await User.findOne({ email });
-    // console.log('user ', user);
-    // if (user) {
-    const transport = nodemailer.createTransport({
-      service: 'Gmail',
-      auth: {
-        user: 'karekamal786@gmail.com', // generated ethereal user
-        pass: 'kzivnetkesjyfded', // generated ethereal password
-      },
-    });
-    const val = Math.floor(1000 + Math.random() * 9000);
-    MyCode = val;
-    transport
-      .sendMail({
-        from: 'karekamal786@gmail.com',
-        to: `${email}`,
-        subject: 'Please confirm your account',
-        html: `<h1>Email Confirmation</h1>
-          <h2>Hello ${userName}</h2>
+    const { email } = req.body;
+    let user = await User.findOne({ email });
+    console.log('user ', user);
+    if (user) {
+      const transport = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+          user: 'karekamal786@gmail.com', // generated ethereal user
+          pass: 'kzivnetkesjyfded', // generated ethereal password
+        },
+      });
+      const val = Math.floor(1000 + Math.random() * 9000);
+      MyCode = val;
+      transport
+        .sendMail({
+          from: 'karekamal786@gmail.com',
+          to: `${email}`,
+          subject: 'Please confirm your account',
+          html: `<h1>Email Confirmation</h1>
+          <h2>Hello ${user.userName}</h2>
           <p>Thank you for subscribing. Please confirm your email by clicking on the following link
           <b>Your confirmation code is ${val}</b>
           </p>
           </div>`,
-      })
-      .then((response) => {
-        console.log('mail sent!!');
+        })
+        .then((response) => {
+          console.log('mail sent!!');
 
-        return res.status(200).json({
-          status: true,
-          message: "Mail Sent Successfully !",
-        });
-      })
-      .catch((err) => console.log(err));
-    // } else {
-    //   return res.status(200).json({
-    //     status: false,
-    //     message: "User Not found !",
-    //   });
-    // }
+          return res.status(200).json({
+            status: true,
+            message: 'Mail Sent Successfully !',
+          });
+        })
+        .catch((err) => console.log(err));
+    } else {
+      return res.status(200).json({
+        status: false,
+        message: 'User Not found !',
+      });
+    }
 
     //here
   }
@@ -78,14 +77,14 @@ router.post(
       console.log('login here');
       return res.status(200).json({
         status: true,
-        message: "Code Verified !",
+        message: 'Code Verified !',
       });
     } else {
       console.log('fail to login');
 
       return res.status(200).json({
         status: false,
-        message: "Invalid Code !",
+        message: 'Invalid Code !',
       });
     }
 
@@ -104,7 +103,7 @@ router.post(
     if (!user) {
       return res.status(200).json({
         status: false,
-        message: "User not found !",
+        message: 'User not found !',
       });
     }
 
@@ -119,7 +118,7 @@ router.post(
 
     return res.status(200).json({
       status: true,
-      message: "Password changed successfully !",
+      message: 'Password changed successfully !',
     });
     //here
   }
