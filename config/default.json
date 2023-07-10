@@ -1,0 +1,7 @@
+{
+"mongoURI":"mongodb+srv://karekamal:karekamal123786@cluster0.tjy27u5.mongodb.net/karekamal",
+"jwtSecret":"MYNAMEISMUHAMMADKHIZER",
+"githubClientId":"1234567891011121314",
+"githubSecret":"1232314423412312324232"
+
+}
