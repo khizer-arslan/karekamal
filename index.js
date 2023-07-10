@@ -29,8 +29,6 @@ app.use('/api/isReady', require('./routes/api/ReadyForBlood.js'));
 app.use('/api/allUsers', require('./routes/api/allUsers'));
 app.use('/api/request', require('./routes/api/requests.donation'));
 
-
-
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);

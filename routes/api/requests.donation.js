@@ -5,7 +5,7 @@ const User = require('../../config/models/User');
 const Requests=require('../../config/models/requests')
 //  Route   post  api/users
 //  Desc    Register user
-//  Access  Public
+//  Access  Public  
 
 router.post(
   '/',
@@ -134,3 +134,5 @@ router.get(
   );
 
 module.exports = router;
+
+
